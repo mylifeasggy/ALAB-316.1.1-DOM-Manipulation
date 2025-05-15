@@ -25,7 +25,7 @@ topMenuEl.style.height = ('100%');
 //Set the background color of topMenuEl to the value stored in the --top-menu-bg CSS custom 
 topMenuEl.style.backgroundColor = 'var(--top-menu-bg, #0e9aa7)'
 //Add a class of flex-around to topMenuEl.
-topMenuEl.classList.add = ('flex-around')
+topMenuEl.classList.add('flex-around')
 
 console.log(topMenuEl)
 
@@ -44,8 +44,8 @@ var menuLinks = [
 
  let a = document.createElement('a')
 
- a.href = link.href
- a.text = link.text 
+ a.setAttribute = ("href",link.href)
+ a.textContent = link.text 
  topMenuEl.appendChild(a)
 
  });
@@ -59,15 +59,15 @@ subMenuEl.style.height = ('100%')
 // //Set the background color of subMenuEl to the value stored in the --sub-menu-bg CSS custom property.
 subMenuEl.style.backgroundColor = 'var(--sub-menu-bg: #3da4ab;)'
 // //Add the class of flex-around to the subMenuEl element.
-subMenuEl.classList.add('flex-around')
+subMenuEl.classList.add("flex-around")
 // //Set the CSS position property of subMenuEl to the value of absolute.
 subMenuEl.style.position = ('absolute')
 // //Set the CSS top property of subMenuEl to the value of 0.
-subMenuEl.style.t
+subMenuEl.style.top= ('0')
 
+console.log(subMenuEl)
 
-
-
+//Part 4: Adding Menu Interaction
 var menuLinks = [
   {text: 'about', href: '/about'},
   {text: 'catalog', href: '#', subLinks: [
@@ -86,15 +86,51 @@ var menuLinks = [
   ]},
 ];
 
-let topMenuLinks= []
+//1. Select and cache the all of the <a> elements inside of 
+// topMenuEl in a variable named topMenuLinks.
 
-for (let a of topMenuEl.children) {
-  topMenuLinks.push(a)
+const topMenuLinks = document.querySelectorAll('a')
 
-}
+//2 Attach a delegated 'click' event listener to topMenuEl.
+topMenuEl.addEventListener('click', (event) => {
+  event.preventDefault()
+  if (event.target.tagName !== 'A') {
+    return event.target;
+  }
+  console.log(event.target)
 
-topMenuEl.addEventListener("click", function preventDefault(event) {
-console.log(event.target)
-event.target.classList.toggle("active")
-return event.target
-})
+
+//   event.target.classList.toggle('active')
+//   if (event.target.classList.contains('active')) {
+
+//     for (let link of menuLinks) {
+
+//       if (link.text === event.target.textContent) {
+//         if ('subLinks' in link) {
+//           buildSubmenu(link.subLinks)
+//           subMenuEl.style.top = '100%'
+//         }
+//       }
+//     }
+//   }
+//   else {
+//     subMenuEl.style.top = '0'
+//   }
+// })
+
+// //PART 5 
+
+// function buildSubmenu(subLinks) {
+
+//   subMenuEl.innerHTML = "";
+
+//   for (let link of subLinks) {
+
+//     let a = document.createElement("a")
+//     a.setAttribute("href", link.href)
+//     a.textContent = link.text
+//     subMenuEl.appendChild(a)
+//   }
+// }
+
+// //PART 

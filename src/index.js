@@ -89,15 +89,46 @@ var menuLinks = [
 //1. Select and cache the all of the <a> elements inside of 
 // topMenuEl in a variable named topMenuLinks.
 
+
 const topMenuLinks = document.querySelectorAll('a')
 
 //2 Attach a delegated 'click' event listener to topMenuEl.
 topMenuEl.addEventListener('click', (event) => {
   event.preventDefault()
   if (event.target.tagName !== 'A') {
-    return event.target;
+  {return event.target;}
   }
-  console.log(event.target)
+
+  console.log(event.target.textContent)
+
+  event.target.classList.toggle('active')
+
+  topMenuLinks.forEach((link) => {
+
+    if(link === event.target){   
+      link.classList.add('active')
+
+    }else {
+         link.classList.remove('active') 
+    }
+})
+});
+
+//Part 5: Adding Submenu Interaction
+
+
+
+
+
+
+
+
+
+
+//The event listener should add the active class to the <a> element 
+// that was clicked, unless it was already active,
+//  in which case it should remove it.
+
 
 
 //   event.target.classList.toggle('active')

@@ -6,8 +6,6 @@
 // 1 Select and cache the <main> element in a variable named mainEl.
 
 const mainEl = document.querySelector('main');
-
-
 // 2 Set the background color of mainEl to the value stored in the --main-bg CSS custom property.
 mainEl.style.backgroundColor = 'var(--main-bg, #4a4e4d)';
 
@@ -49,7 +47,6 @@ var menuLinks = [
  a.href = link.href
  a.innerText = link.text 
  topMenuEl.appendChild(a)
-  console.log(a)
 
  });
 

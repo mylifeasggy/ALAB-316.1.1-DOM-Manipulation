@@ -90,78 +90,51 @@ var menuLinks = [
 // topMenuEl in a variable named topMenuLinks.
 
 
-const topMenuLinks = document.querySelectorAll('a')
+const topMenuLinks = topMenuEl.querySelectorAll('a')
 
 //2 Attach a delegated 'click' event listener to topMenuEl.
 topMenuEl.addEventListener('click', (event) => {
   event.preventDefault()
-  if (event.target.tagName !== 'A') {
-  {return event.target;}
+
+  const clickedElement = event.target;
+  if (clickedElement.tagName !== 'A') {
+    return clickedElement;
   }
 
-  console.log(event.target.textContent)
+ console.log(clickedElement.textContent)
 
-  event.target.classList.toggle('active')
+ clickedElement.classList.toggle('active')
 
-  topMenuLinks.forEach((link) => {
-
-    if(link === event.target){   
-      link.classList.add('active')
-
-    }else {
-         link.classList.remove('active') 
+   topMenuLinks.forEach(link=> {
+    // If this linkElement is not the one that was clicked
+    if (link!== clickedElement) {
+      link.classList.remove('active');
     }
-})
+  });
+
+  if (clickedElement.classList.contains('active')) {
+      for (let link of menuLinks) {
+      if (link.text === clickedElement.textContent) {
+        if ("subLinks" in link) {
+          buildSubmenu(link.subLinks)
+          subMenuEl.style.top = "100%"
+        }
+      }
+    
+      }
+  
+} else {
+    subMenuEl.style.top = '0'
+
+  }
 });
 
-//Part 5: Adding Submenu Interaction
-
-
-
-
-
-
-
-
-
-
-//The event listener should add the active class to the <a> element 
-// that was clicked, unless it was already active,
-//  in which case it should remove it.
-
-
-
-//   event.target.classList.toggle('active')
-//   if (event.target.classList.contains('active')) {
-
-//     for (let link of menuLinks) {
-
-//       if (link.text === event.target.textContent) {
-//         if ('subLinks' in link) {
-//           buildSubmenu(link.subLinks)
-//           subMenuEl.style.top = '100%'
-//         }
-//       }
-//     }
-//   }
-//   else {
-//     subMenuEl.style.top = '0'
-//   }
-// })
-
-// //PART 5 
-
-// function buildSubmenu(subLinks) {
-
-//   subMenuEl.innerHTML = "";
-
-//   for (let link of subLinks) {
-
-//     let a = document.createElement("a")
-//     a.setAttribute("href", link.href)
-//     a.textContent = link.text
-//     subMenuEl.appendChild(a)
-//   }
-// }
-
-// //PART 
+function buildSubmenu(submenu) {
+  subMenuEl.innerHTML = ""
+  for (let link of submenu) {
+    let a = document.createElement("a")
+    a.setAttribute("href", link.href)
+    a.textContent = link.text
+    subMenuEl.appendChild(a)
+  }
+}

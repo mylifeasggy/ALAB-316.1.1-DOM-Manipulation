@@ -112,6 +112,10 @@ topMenuEl.addEventListener('click', (event) => {
     }
   });
 
+//Part 5: Adding Submenu Interaction
+
+
+
   if (clickedLink.classList.contains('active')) {
       for (let link of menuLinks) {
       if (link.text === clickedLink.textContent) {
@@ -128,8 +132,9 @@ topMenuEl.addEventListener('click', (event) => {
 
   }
 });
+//The submenu needs to be dynamic based on the clicked link. To facilitate that, we will create a helper function called 
+// buildSubmenu that does the following:
 
-//function called buildSubmenu
 function buildSubmenu(submenu) {
   subMenuEl.innerHTML = ""
   for (let link of submenu) {

@@ -138,3 +138,31 @@ function buildSubmenu(submenu) {
     subMenuEl.appendChild(a)
   }
 }
+
+
+//Attach a delegated 'click' event listener to subMenuEl.
+
+subMenuEl.addEventListener('click', (evt) => {
+evt.preventDefault()
+const clicked = evt.target;
+
+if(clicked.tagName !== 'A')
+return clicked;
+
+console.log(clicked.textContent)
+// the event listener should set the CSS top property of subMenuEl to 0.
+ subMenuEl.style.top = '0';
+
+//Remove the active class from each <a> element in topMenuLinks.
+
+   topMenuLinks.forEach(link=> {
+    // If this linkElement is not the one that was clicked
+    if (link!== clicked) {
+      link.classList.remove('active');
+    }
+  });
+//Update the contents of mainEl, within an <h1>, to the contents of the <a> element clicked within subMenuEl.
+  mainEl.innerHTML= `<h1>${clicked.textContent}</h1>`
+
+});
+

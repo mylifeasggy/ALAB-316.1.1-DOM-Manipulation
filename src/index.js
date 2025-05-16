@@ -96,25 +96,25 @@ const topMenuLinks = topMenuEl.querySelectorAll('a')
 topMenuEl.addEventListener('click', (event) => {
   event.preventDefault()
 
-  const clickedElement = event.target;
-  if (clickedElement.tagName !== 'A') {
-    return clickedElement;
+  const clickedLink = event.target;
+  if (clickedLink.tagName !== 'A') {
+    return clickedLink;
   }
 
- console.log(clickedElement.textContent)
+ console.log(clickedLink.textContent)
 
- clickedElement.classList.toggle('active')
+ clickedLink.classList.toggle('active')
 
    topMenuLinks.forEach(link=> {
     // If this linkElement is not the one that was clicked
-    if (link!== clickedElement) {
+    if (link!== clickedLink) {
       link.classList.remove('active');
     }
   });
 
-  if (clickedElement.classList.contains('active')) {
+  if (clickedLink.classList.contains('active')) {
       for (let link of menuLinks) {
-      if (link.text === clickedElement.textContent) {
+      if (link.text === clickedLink.textContent) {
         if ("subLinks" in link) {
           buildSubmenu(link.subLinks)
           subMenuEl.style.top = "100%"
@@ -129,6 +129,7 @@ topMenuEl.addEventListener('click', (event) => {
   }
 });
 
+//function called buildSubmenu
 function buildSubmenu(submenu) {
   subMenuEl.innerHTML = ""
   for (let link of submenu) {
@@ -142,9 +143,9 @@ function buildSubmenu(submenu) {
 
 //Attach a delegated 'click' event listener to subMenuEl.
 
-subMenuEl.addEventListener('click', (evt) => {
-evt.preventDefault()
-const clicked = evt.target;
+subMenuEl.addEventListener('click', (event) => {
+event.preventDefault()
+const clicked = event.target;
 
 if(clicked.tagName !== 'A')
 return clicked;

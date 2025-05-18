@@ -39,31 +39,24 @@ var menuLinks = [
   { text: 'orders', href: '/orders' },
   { text: 'account', href: '/account' },
 ];
- menuLinks.forEach(link => {
- console.log(link);
+ menuLinks.forEach(value => {
 
- let a = document.createElement('a')
-
- a.setAttribute = ("href",link.href)
- a.textContent = link.text 
- topMenuEl.appendChild(a)
+ let anchor = document.createElement('a')
+ anchor.href = value.href
+ anchor.textContent = value.text 
+ topMenuEl.appendChild(anchor)
 
  });
 
 
+//PART IV SUBMENU
+const subMenuEl = document.getElementById('sub-menu')//Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+subMenuEl.style.height = ('100%') //Set the height subMenuEl element to be "100%".
+subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)'; //Set the background color of subMenuEl to the value stored in the --sub-menu-bg CSS custom property.
+subMenuEl.classList.add("flex-around")//Add the class of flex-around to the subMenuEl element.
+subMenuEl.style.position = 'absolute';//Set the CSS position property of subMenuEl to the value of absolute.
+subMenuEl.style.top= '0';//Set the CSS top property of subMenuEl to the value of 0.
 
-// //Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
-const subMenuEl = document.getElementById('sub-menu')
-// //Set the height subMenuEl element to be "100%".
-subMenuEl.style.height = ('100%')
-// //Set the background color of subMenuEl to the value stored in the --sub-menu-bg CSS custom property.
-subMenuEl.style.backgroundColor = 'var(--sub-menu-bg: #3da4ab;)'
-// //Add the class of flex-around to the subMenuEl element.
-subMenuEl.classList.add("flex-around")
-// //Set the CSS position property of subMenuEl to the value of absolute.
-subMenuEl.style.position = ('absolute')
-// //Set the CSS top property of subMenuEl to the value of 0.
-subMenuEl.style.top= ('0')
 
 console.log(subMenuEl)
 
@@ -86,36 +79,38 @@ var menuLinks = [
   ]},
 ];
 
-//1. Select and cache the all of the <a> elements inside of 
-// topMenuEl in a variable named topMenuLinks.
 
 
-const topMenuLinks = topMenuEl.querySelectorAll('a')
+const topMenuLinks = topMenuEl.querySelectorAll('a') //1. Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
 
 //2 Attach a delegated 'click' event listener to topMenuEl.
 topMenuEl.addEventListener('click', (event) => {
-  event.preventDefault()
+  event.preventDefault() 
 
-  const clickedLink = event.target;
-  if (clickedLink.tagName !== 'A') {
-    return clickedLink;
+  const clickedLink = event.target; // what ever element was clicked is event.target // return: DONT EVEN CONTINUE.
+  if (clickedLink.tagName !== 'A') {// if somebody clicked an tag that is not an anchor tag, like an spa tag,DO'NT DO IT.
+        return clickedLink;
   }
 
  console.log(clickedLink.textContent)
 
- clickedLink.classList.toggle('active')
+ clickedLink.classList.toggle('active')  
 
    topMenuLinks.forEach(link=> {
     // If this linkElement is not the one that was clicked
     if (link!== clickedLink) {
-      link.classList.remove('active');
+      link.classList.remove('active'); /// style css. has the contains
+      clickedLink.classList.add('active')
     }
   });
+
+ 
 
 //Part 5: Adding Submenu Interaction
 
 
 
+ 
   if (clickedLink.classList.contains('active')) {
       for (let link of menuLinks) {
       if (link.text === clickedLink.textContent) {
@@ -131,7 +126,9 @@ topMenuEl.addEventListener('click', (event) => {
     subMenuEl.style.top = '0'
 
   }
-});
+
+   });
+
 //The submenu needs to be dynamic based on the clicked link. To facilitate that, we will create a helper function called 
 // buildSubmenu that does the following:
 
